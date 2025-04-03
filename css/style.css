@@ -1,0 +1,622 @@
+/* Global Styles with Rain Dots Background */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  
+  /* Rain Dots Background Animation */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  .rain-dots {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+  }
+  
+  .rain-dot {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: rgba(200, 225, 255, 0.5);
+    border-radius: 50%;
+    animation: rain linear infinite;
+  }
+  
+  @keyframes rain {
+    from {
+      transform: translateY(-100vh);
+    }
+    to {
+      transform: translateY(100vh);
+    }
+  }
+  
+  /* Header Styles */
+  header {
+    background-color: rgba(44, 62, 80, 0.9);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  header button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  header button:hover {
+    background-color: #c0392b;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  /* Main Content Container */
+  .dashboard-container, .auth-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3px);
+  }
+  
+  /* Form Styles */
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  .form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+  
+  /* Button Styles */
+  button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Memo Item Styles */
+  .memo-item {
+    background: rgba(249, 249, 249, 0.9);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+    border-left: 4px solid #3498db;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .memo-item h3 {
+    margin-top: 0;
+    color: #2c3e50;
+  }
+  
+  .memo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .memo-category {
+    background-color: #3498db;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .timestamp {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  
+  /* Attachment Styles */
+  .memo-attachment {
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: rgba(240, 240, 240, 0.7);
+    border-radius: 4px;
+    border-left: 3px solid #3498db;
+  }
+  
+  .attachment-preview {
+    max-width: 100%;
+    max-height: 200px;
+    display: block;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+  }
+  
+  /* Status Styles */
+  .status-pending {
+    color: #f39c12;
+    font-weight: bold;
+  }
+  
+  .status-approved {
+    color: #2ecc71;
+    font-weight: bold;
+  }
+  
+  .status-rejected {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+  
+  /* Error/Success Messages */
+  .error-message {
+    color: #e74c3c;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: rgba(250, 219, 216, 0.7);
+    border-radius: 4px;
+    border-left: 3px solid #e74c3c;
+  }
+  
+  .success-message {
+    color: #27ae60;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: rgba(213, 245, 227, 0.7);
+    border-radius: 4px;
+    border-left: 3px solid #27ae60;
+  }
+  
+  /* File Input Styles */
+  input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+  }
+  
+  small {
+    display: block;
+    margin-top: 0.3rem;
+    color: #7f8c8d;
+    font-size: 0.8rem;
+  }
+  
+  /* Admin Specific Styles */
+  .admin-tabs {
+    display: flex;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .tab-btn {
+    padding: 0.75rem 1.5rem;
+    background: #eee;
+    border: none;
+    border-radius: 4px 4px 0 0;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .tab-btn.active {
+    background: #3498db;
+    color: white;
+  }
+  
+  .tab-content {
+    display: none;
+  }
+  
+  .memo-actions, .user-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .delete-btn {
+    background-color: #e74c3c;
+    padding: 0.5rem 1rem;
+    width: auto;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  .user-item {
+    background: rgba(249, 249, 249, 0.9);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+    border-left: 4px solid #2ecc71;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .user-item h3 {
+    margin-top: 0;
+    color: #2c3e50;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .dashboard-container, .auth-container {
+      margin: 1rem;
+      padding: 1rem;
+    }
+    
+    header {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+    
+    .admin-tabs {
+      flex-wrap: wrap;
+    }
+    
+    .tab-btn {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+
+
+  /* Landing Page Styles */
+.landing-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .landing-container header {
+    margin-bottom: 3rem;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  
+  .landing-container h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  
+  .landing-container p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+  }
+  
+  .auth-options {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 3rem 0;
+  }
+  
+  .option-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    padding: 2rem;
+    width: 300px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  .option-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .option-card h2 {
+    color: #2c3e50;
+    margin-top: 0;
+  }
+  
+  .option-card p {
+    margin-bottom: 1.5rem;
+  }
+  
+  .option-card.admin {
+    border-top: 4px solid #3498db;
+  }
+  
+  .option-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .btn {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: #2980b9;
+  }
+  
+  .btn.secondary {
+    background-color: #f5f5f5;
+    color: #2c3e50;
+    border: 1px solid #ddd;
+  }
+  
+  .btn.secondary:hover {
+    background-color: #e0e0e0;
+  }
+  
+  footer {
+    margin-top: 3rem;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+  }
+  
+  footer a {
+    color: #3498db;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .auth-options {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .option-card {
+      width: 100%;
+      max-width: 350px;
+    }
+  }
+
+  /* Forgot Password Specific Styles */
+.auth-links {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+  
+  .auth-links p {
+    margin: 0.5rem 0;
+  }
+  
+  #reset-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+  }
+  
+  /* Loading state */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  .memo-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: white;
+  }
+  
+  .memo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .memo-category {
+    background: #f0f0f0;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  
+  .memo-actions {
+    margin-top: 15px;
+    text-align: right;
+  }
+  
+  .delete-btn {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .delete-btn:hover {
+    background: #cc0000;
+  }
+  
+  .attachment-preview {
+    max-width: 100%;
+    max-height: 200px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+  }
+
+
+
+
+  /* Memo Item Styling */
+.memo-item {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 4px solid #ddd;
+}
+
+.memo-item.pending { border-left-color: #FFC107; }
+.memo-item.approved { border-left-color: #4CAF50; }
+.memo-item.rejected { border-left-color: #F44336; }
+
+.memo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.memo-category {
+  background: #e0e0e0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+}
+
+.memo-content {
+  margin: 15px 0;
+  line-height: 1.6;
+}
+
+.memo-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.memo-attachment {
+  margin-top: 15px;
+  padding: 10px;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.attachment-preview {
+  max-width: 100%;
+  max-height: 200px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status-pending { background: #FFF3CD; color: #856404; }
+.status-approved { background: #D4EDDA; color: #155724; }
+.status-rejected { background: #F8D7DA; color: #721C24; }
+
+.timestamp {
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 10px;
+}
+
+
+.status-select {
+  margin-left: 10px;
+  padding: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.delete-btn {
+  background: #F44336;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #D32F2F;
+}

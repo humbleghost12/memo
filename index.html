@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memo System - Home</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="landing-container">
+    <header>
+      <h1>Welcome to Memo System</h1>
+      <p>Streamline your organizational communication</p>
+    </header>
+    
+    <main class="auth-options">
+      <div class="option-card">
+        <h2>Employee Access</h2>
+        <p>Submit memos and track your submissions</p>
+        <div class="option-buttons">
+          <a href="login.html" class="btn">Employee Login</a>
+          <a href="signup.html" class="btn secondary">Create Account</a>
+        </div>
+      </div>
+      
+      <div class="option-card admin">
+        <h2>Admin Access</h2>
+        <p>Manage all memos and user accounts</p>
+        <div class="option-buttons">
+          <a href="admin-login.html" class="btn">Admin Login</a>
+        </div>
+      </div>
+    </main>
+    
+    <footer>
+      <p>Need help? <a href="mailto:support@memosystem.com">Contact support</a></p>
+    </footer>
+  </div>
+
+  <!-- Rain dots background will be inserted here by JavaScript -->
+  
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/background.js"></script>
+  
+  <script>
+    // Check if user is already logged in
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // Redirect to appropriate dashboard
+        firebase.firestore().collection('users').doc(user.uid).get()
+          .then((doc) => {
+            if (doc.exists && doc.data().isAdmin) {
+              window.location.href = "admin.html";
+            } else {
+              window.location.href = "dashboard.html";
+            }
+          });
+      }
+      // If not logged in, stay on index page
+    });
+  </script>
+</body>
+</html>

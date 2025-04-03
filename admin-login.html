@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - Memo System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="auth-container">
+    <h1>Memo System</h1>
+    <h2>Admin Login</h2>
+    <div id="error-message" class="error-message"></div>
+    <form id="login-form" onsubmit="event.preventDefault(); adminLogin();">
+      <div class="form-group">
+        <label for="email">Admin Email</label>
+        <input type="email" id="email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <p>Not an admin? <a href="login.html">Employee Login</a></p>
+    <a href="forget-password.html">Forgot Password?</a>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  
+  <script>
+        // Admin-specific login function
+    function adminLogin() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const submitBtn = document.querySelector('#login-form button[type="submit"]');
+      const originalBtnText = submitBtn.textContent;
+      
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Logging in...';
+      
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Check if user is admin
+          return firebase.firestore().collection('users').doc(userCredential.user.uid).get();
+        })
+        .then((doc) => {
+          if (doc.exists && doc.data().isAdmin) {
+          window.location.href = "admin.html";
+
+
+          } else {
+            firebase.auth().signOut();
+            throw new Error("You don't have admin privileges");
+          }
+        })
+        .catch((error) => {
+          document.getElementById('error-message').textContent = error.message;
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
+        });
+    }
+  </script>
+</body>
+</html>

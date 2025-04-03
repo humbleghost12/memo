@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Memo System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Memo System - Admin</h1>
+    <button onclick="logout()">Logout</button>
+  </header>
+  
+  <div class="dashboard-container">
+    <div class="admin-tabs">
+      <button class="tab-btn active" onclick="openTab('memos')">Manage Memos</button>
+      <button class="tab-btn" onclick="openTab('users')">Manage Users</button>
+      <button class="tab-btn" onclick="openTab('create-user')">Create User</button>
+    </div>
+    
+    <div id="memos" class="tab-content" style="display: block;">
+      <h2>All Submitted Memos</h2>
+      <div id="admin-memo-list"></div>
+    </div>
+    
+    <div id="users" class="tab-content">
+      <h2>All Users</h2>
+      <div id="user-list"></div>
+    </div>
+    
+    <div id="create-user" class="tab-content">
+      <h2>Create New User</h2>
+      <div id="create-account-error" class="error-message"></div>
+      <form id="create-account-form" onsubmit="event.preventDefault(); createAccount();">
+        <div class="form-group">
+          <label for="new-name">Full Name</label>
+          <input type="text" id="new-name" required>
+        </div>
+        <div class="form-group">
+          <label for="new-email">Email</label>
+          <input type="email" id="new-email" required>
+        </div>
+        <div class="form-group">
+          <label for="new-password">Password (min 6 characters)</label>
+          <input type="password" id="new-password" minlength="6" required>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="new-isAdmin"> Admin User
+          </label>
+        </div>
+        <button type="submit">Create User</button>
+      </form>
+    </div>
+  </div>
+  
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadAllMemos();
+    });
+    
+    function openTab(tabName) {
+      // Hide all tab content
+      const tabContents = document.getElementsByClassName('tab-content');
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+      }
+      
+      // Remove active class from all buttons
+      const tabButtons = document.getElementsByClassName('tab-btn');
+      for (let i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].classList.remove('active');
+      }
+      
+      // Show the current tab and mark button as active
+      document.getElementById(tabName).style.display = 'block';
+      event.currentTarget.classList.add('active');
+      
+      // Load data if needed
+      if (tabName === 'users') {
+        loadAllUsers();
+      }
+    }
+  </script>
+</body>
+</html>
